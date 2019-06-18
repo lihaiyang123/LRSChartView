@@ -25,12 +25,12 @@ TODO: Add long description of the pod here.
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'lihaiyang' => 'lihaiyang730325@qq.com' }
-  # s.source           = { :git => 'http://172.16.2.15:9090/lijialin/YJYHistogramView.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/lihaiyang123/LRSChartView.git', :tag => "v#{s.version}" }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'LRSChartView/**/*'
+  s.source_files = "LRSChartView/LRSChartView/*.{h,m}"
   
   # s.resource_bundles = {
   #   'YJYHistogramView' => ['YJYHistogramView/Assets/*.png']
