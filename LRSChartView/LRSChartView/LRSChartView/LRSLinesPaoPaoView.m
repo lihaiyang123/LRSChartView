@@ -10,7 +10,6 @@
 #import "LinesSelectCell.h"
 #import "NSString+LRSChartView.h"
 #import "UIColor+LRSChartView.h"
-#import "Masonry.h"
 @interface LRSLinesPaoPaoView()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) UITableView *listTb;
 @property (assign, nonatomic) CGFloat maxLeftTitleWidth;
@@ -43,15 +42,15 @@
     return self;
 }
 - (void)setUp {
-    UIImageView *bgImageView = [[UIImageView alloc]initWithFrame:CGRectZero];
+    UIImageView *bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
     bgImageView.backgroundColor = [UIColor clearColor];
     [self addSubview:bgImageView];
-    [bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self);
-    }];
-    [self.listTb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self);
-    }];
+//    [bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.left.bottom.right.equalTo(self);
+//    }];
+//    [self.listTb mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.left.bottom.right.equalTo(self);
+//    }];
 }
 - (void)show:(NSArray *)dataArr and:(NSString *)title andTitleColor:(UIColor *)titleColor colorArr:(NSArray *)color {
     self.maxLeftTitleWidth = 0;
@@ -183,9 +182,9 @@
         pathX = self.bounds.size.width/2;
     }
     if (direction == directionTop) {
-        [self.listTb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(0);
-        }];
+        CGRect frame = self.listTb.frame;
+        frame.origin.y = 0;
+        [self.listTb setFrame:frame];
         // 设置path起点
         [self.borderPath moveToPoint:CGPointMake(5, 5)];
         // 左上角的圆角
@@ -210,9 +209,9 @@
         // 直线，回到起点
         [self.borderPath addLineToPoint:CGPointMake(5, 5)];
     }else{
-        [self.listTb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(5);
-        }];
+        CGRect frame = self.listTb.frame;
+        frame.origin.y = 5;
+        [self.listTb setFrame:frame];
         // 设置path起点
         [self.borderPath moveToPoint:CGPointMake(5, 10)];
         // 左上角的圆角
