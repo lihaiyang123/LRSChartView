@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 @interface NSString (LRSChartView)
 ///得到现在时间戳的字符串
 + (instancetype)getDateUnqueDescription;
