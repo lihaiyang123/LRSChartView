@@ -30,7 +30,7 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = "LRSChartView/LRSChartView/*"
+  s.source_files = "LRSChartView/LRSChartView/LRSChartView/*"
   
   # s.resource_bundles = {
   #   'YJYHistogramView' => ['YJYHistogramView/Assets/*.png']

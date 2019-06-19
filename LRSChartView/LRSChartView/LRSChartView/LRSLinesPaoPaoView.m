@@ -8,6 +8,8 @@
 
 #import "LRSLinesPaoPaoView.h"
 #import "LinesSelectCell.h"
+#import "NSString+LRSChartView.h"
+#import "UIColor+LRSChartView.h"
 @interface LRSLinesPaoPaoView()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) UITableView *listTb;
 @property (assign, nonatomic) CGFloat maxLeftTitleWidth;

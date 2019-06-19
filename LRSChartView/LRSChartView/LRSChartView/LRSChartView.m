@@ -7,10 +7,12 @@
 //
 
 #import "LRSChartView.h"
-#import "YJYTouchCollectionView.h"
-#import "YJYTouchScroll.h"
-#import "YJYLinesCell.h"
+#import "LRSTouchCollectionView.h"
+#import "LRSTouchScroll.h"
+#import "LRSLinesCell.h"
 #import "LRSLinesPaoPaoView.h"
+#import "UIColor+LRSChartView.h"
+#import "NSString+LRSChartView.h"
 #define btnW 12
 #define kPaoPaoWidth 75.f
 #define chartViewHeight self.bounds.size.height - 30
@@ -104,8 +106,8 @@
     CGFloat titleWOfY;
 }
 
-@property (nonatomic,strong)YJYTouchScroll *chartScrollView;
-@property (nonatomic,strong)YJYTouchCollectionView *xAxiCollectionView;
+@property (nonatomic,strong)LRSTouchScroll *chartScrollView;
+@property (nonatomic,strong)LRSTouchCollectionView *xAxiCollectionView;
 @property (nonatomic,strong)UIPageControl *pageControl;//分页
 @property (nonatomic,strong)NSMutableArray *leftPointArr;//左边的数据源
 @property (nonatomic,strong)NSMutableArray *rightPointArr;//左边的数据源
@@ -206,16 +208,16 @@
     return _charCircleViewArr;
 }
 
--(YJYTouchCollectionView *)xAxiCollectionView{
+-(LRSTouchCollectionView *)xAxiCollectionView{
     if (!_xAxiCollectionView) {
         UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc]init];
         collectionViewLayout.minimumInteritemSpacing = 0;
         collectionViewLayout.minimumLineSpacing = 0;
         collectionViewLayout.sectionInset = UIEdgeInsetsMake(0, 4, 0, 0);
         collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        _xAxiCollectionView = [[YJYTouchCollectionView alloc]initWithFrame:CGRectMake(CGRectGetMinX(_chartScrollView.frame), CGRectGetMaxY(_chartScrollView.frame) + 10, CGRectGetWidth(_chartScrollView.frame) + CGRectGetWidth(_chartScrollView.frame) / (_xRow - 1), 20) collectionViewLayout:collectionViewLayout];
+        _xAxiCollectionView = [[LRSTouchCollectionView alloc]initWithFrame:CGRectMake(CGRectGetMinX(_chartScrollView.frame), CGRectGetMaxY(_chartScrollView.frame) + 10, CGRectGetWidth(_chartScrollView.frame) + CGRectGetWidth(_chartScrollView.frame) / (_xRow - 1), 20) collectionViewLayout:collectionViewLayout];
         _xAxiCollectionView.backgroundColor = [UIColor clearColor];
-        [_xAxiCollectionView registerNib:[UINib nibWithNibName:@"YJYLinesCell" bundle:nil] forCellWithReuseIdentifier:@"YJYLinesCell"];
+        [_xAxiCollectionView registerNib:[UINib nibWithNibName:@"LRSLinesCell" bundle:nil] forCellWithReuseIdentifier:@"LRSLinesCell"];
         _xAxiCollectionView.delegate = self;
         _xAxiCollectionView.dataSource = self;
         _xAxiCollectionView.bounces = NO;
@@ -273,7 +275,7 @@
     return self.dataArrOfX.count;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    YJYLinesCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"YJYLinesCell" forIndexPath:indexPath];
+    LRSLinesCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LRSLinesCell" forIndexPath:indexPath];
     if (indexPath.row == _indexPathIndex + 1) {
         if (self.x_Select_Font) {
             cell.titleLB.font = self.x_Select_Font;
@@ -711,7 +713,7 @@
 -(void)addDetailViews{
     CGFloat width = 0;
     width = _chartViewStyle == LRSChartViewLeftRightLine ? self.bounds.size.width-titleWOfY * 2 :self.bounds.size.width-titleWOfY;
-    self.chartScrollView = [[YJYTouchScroll alloc]initWithFrame:CGRectMake(titleWOfY, 0, width, chartViewHeight)];
+    self.chartScrollView = [[LRSTouchScroll alloc]initWithFrame:CGRectMake(titleWOfY, 0, width, chartViewHeight)];
     self.chartScrollView.backgroundColor = [UIColor clearColor];
     self.chartScrollView.bounces = NO;
     self.chartScrollView.delegate = self;
@@ -1141,7 +1143,6 @@
         self.lastValue = [NSValue valueWithCGPoint:point];
         point.x -= titleWOfY;
     }
-    DLog(@"%f",point.x);
     //    DLog(@"%f--------------%f",point.x,point.y);
     CGFloat xMargin = CGRectGetWidth(self.chartScrollView.frame) / (_xRow - 1);
     if (point.x > xMargin / 2 && point.x < CGRectGetMaxX(self.chartScrollView.frame) && point.y > CGRectGetMinY(self.chartScrollView.frame) && point.y < CGRectGetMaxY(self.chartScrollView.frame)) {
@@ -1270,7 +1271,7 @@
         self.paopaoView.beyondRight = YES;
     }
     NSArray * colorArray = _paopaoDataColors ? _paopaoDataColors : colorArr;
-    UIColor* titleColor = _paopaoTitleColor ? _paopaoTitleColor : [UIColor textAuxiliaryColor];
+    UIColor* titleColor = _paopaoTitleColor ? _paopaoTitleColor : [UIColor colorWithHexString:@"#999999"];
     self.paopaoView.chartContentWidth = self.chartScrollView.contentSize.width;
     NSMutableArray * colorMarray = [NSMutableArray array];
     if (colorArray.count != dataArr.count) {
