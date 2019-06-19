@@ -13,7 +13,6 @@
 #import "LRSLinesPaoPaoView.h"
 #import "UIColor+LRSChartView.h"
 #import "NSString+LRSChartView.h"
-//#import "Masonry.h"
 #define btnW 12
 #define kPaoPaoWidth 75.f
 #define chartViewHeight self.bounds.size.height - 30
