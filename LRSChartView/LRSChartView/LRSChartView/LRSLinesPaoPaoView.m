@@ -2,14 +2,14 @@
 //  YJYLinesPaoPaoView.m
 //  YJYLinesView
 //
-//  Created by yuhuan on 2018/3/22.
-//  Copyright © 2018年 YJY. All rights reserved.
+//  Created by lihaiyang on 2018/10/23.
+//  Copyright © 2018 lihaiyang. All rights reserved.
 //
 
 #import "LRSLinesPaoPaoView.h"
 #import "LinesSelectCell.h"
-#import "NSString+LRSChartView.h"
 #import "UIColor+LRSChartView.h"
+#import "NSString+LRSChartView.h"
 @interface LRSLinesPaoPaoView()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) UITableView *listTb;
 @property (assign, nonatomic) CGFloat maxLeftTitleWidth;
@@ -21,8 +21,11 @@
 @end
 
 @implementation LRSLinesPaoPaoView {
+    
     NSArray *_dataArr;
+    
     NSArray *_colorArr;
+    
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -45,13 +48,20 @@
     UIImageView *bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
     bgImageView.backgroundColor = [UIColor clearColor];
     [self addSubview:bgImageView];
-//    [bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.left.bottom.right.equalTo(self);
-//    }];
-//    [self.listTb mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.left.bottom.right.equalTo(self);
-//    }];
+    //    [bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.top.left.bottom.right.equalTo(self);
+    //    }];
+    [self addSubview:self.listTb];
+    //    [self.listTb mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.top.left.bottom.right.equalTo(self);
+    //    }];
 }
+
+-(void)setFrame:(CGRect)frame{
+    super.frame = frame;
+    [self.listTb setFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
+}
+
 - (void)show:(NSArray *)dataArr and:(NSString *)title andTitleColor:(UIColor *)titleColor colorArr:(NSArray *)color {
     self.maxLeftTitleWidth = 0;
     NSMutableArray *titleArray = [NSMutableArray array];
@@ -147,14 +157,14 @@
 }
 - (UITableView *)listTb {
     if (!_listTb) {
-        _listTb = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStylePlain];
+        _listTb = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)) style:UITableViewStylePlain];
         _listTb.backgroundColor = [UIColor clearColor];
         _listTb.separatorStyle = UITableViewCellSeparatorStyleNone;
         _listTb.allowsSelection = NO;
         _listTb.bounces = NO;
         _listTb.dataSource = self;
         _listTb.delegate = self;
-        [self addSubview:_listTb];
+        //        [self addSubview:_listTb];
     }
     return _listTb;
 }
@@ -185,6 +195,9 @@
         CGRect frame = self.listTb.frame;
         frame.origin.y = 0;
         [self.listTb setFrame:frame];
+        //        [self.listTb mas_makeConstraints:^(MASConstraintMaker *make) {
+        //            make.top.mas_equalTo(0);
+        //        }];
         // 设置path起点
         [self.borderPath moveToPoint:CGPointMake(5, 5)];
         // 左上角的圆角
@@ -212,6 +225,9 @@
         CGRect frame = self.listTb.frame;
         frame.origin.y = 5;
         [self.listTb setFrame:frame];
+        //        [self.listTb mas_makeConstraints:^(MASConstraintMaker *make) {
+        //            make.top.mas_equalTo(5);
+        //        }];
         // 设置path起点
         [self.borderPath moveToPoint:CGPointMake(5, 10)];
         // 左上角的圆角
@@ -238,4 +254,5 @@
     // 将这个path赋值给maskLayer的path
     self.maskLayer.path = self.borderPath.CGPath;
 }
+
 @end
