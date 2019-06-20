@@ -217,7 +217,7 @@
         collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         _xAxiCollectionView = [[LRSTouchCollectionView alloc]initWithFrame:CGRectMake(CGRectGetMinX(_chartScrollView.frame), CGRectGetMaxY(_chartScrollView.frame) + 10, CGRectGetWidth(_chartScrollView.frame) + CGRectGetWidth(_chartScrollView.frame) / (_xRow - 1), 20) collectionViewLayout:collectionViewLayout];
         _xAxiCollectionView.backgroundColor = [UIColor clearColor];
-        [_xAxiCollectionView registerNib:[UINib nibWithNibName:@"LRSLinesCell" bundle:nil] forCellWithReuseIdentifier:@"LRSLinesCell"];
+        [_xAxiCollectionView registerNib:[UINib nibWithNibName:@"LRSLinesCell" bundle:[NSBundle bundleForClass:[LRSLinesCell class]]] forCellWithReuseIdentifier:@"LRSLinesCell"];
         _xAxiCollectionView.delegate = self;
         _xAxiCollectionView.dataSource = self;
         _xAxiCollectionView.bounces = NO;

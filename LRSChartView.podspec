@@ -1,10 +1,10 @@
-@version = "0.3.0"
+@version = "0.5.0"
 
 Pod::Spec.new do |s|
   s.name          = "LRSChartView"
   s.version       = @version
   s.summary       = "折线图"
-  s.description   = "折线图"
+  s.description   = "悦家云折线图"
   s.homepage      = "https://github.com/lihaiyang123/LRSChartView"
   s.license       = { :type => "MIT", :file => "LICENSE" }
   s.author        = { "lihaiyang123" => "lihaiyang730325@qq.com" }
