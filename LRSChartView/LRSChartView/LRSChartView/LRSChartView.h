@@ -135,6 +135,8 @@ typedef NS_ENUM(NSInteger,LRSUnitStyle){
  */
 @property (nonatomic,strong) NSString * unitName;
 -(void)show;
+
+-(void)reShow;
 //初始化
 -(void)initNew;
 @end
